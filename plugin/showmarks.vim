@@ -100,6 +100,7 @@ endif
 
 " Options: Set up some nice defaults
 if !exists('g:showmarks_enable'      ) | let g:showmarks_enable       = 1    | endif
+if !exists('g:showmarks_add_maps'    ) | let g:showmarks_add_maps     = 1    | endif
 if !exists('g:showmarks_textlower'   ) | let g:showmarks_textlower    = ">"  | endif
 if !exists('g:showmarks_textupper'   ) | let g:showmarks_textupper    = ">"  | endif
 if !exists('g:showmarks_textother'   ) | let g:showmarks_textother    = ">"  | endif
@@ -121,14 +122,16 @@ com! -nargs=0 ShowMarksClearMark :call <sid>ShowMarksClearMark()
 com! -nargs=0 ShowMarksClearAll  :call <sid>ShowMarksClearAll()
 com! -nargs=0 ShowMarksPlaceMark :call <sid>ShowMarksPlaceMark()
 
-" Mappings (NOTE: Leave the '|'s immediately following the '<cr>' so the mapping does not contain any trailing spaces!)
-if !hasmapto( '<Plug>ShowmarksShowMarksToggle' ) | map <silent> <unique> <leader>mt :ShowMarksToggle<cr>|    endif
-if !hasmapto( '<Plug>ShowmarksShowMarksOn'     ) | map <silent> <unique> <leader>mo :ShowMarksOn<cr>|        endif
-if !hasmapto( '<Plug>ShowmarksClearMark'       ) | map <silent> <unique> <leader>mh :ShowMarksClearMark<cr>| endif
-if !hasmapto( '<Plug>ShowmarksClearAll'        ) | map <silent> <unique> <leader>ma :ShowMarksClearAll<cr>|  endif
-if !hasmapto( '<Plug>ShowmarksPlaceMark'       ) | map <silent> <unique> <leader>mm :ShowMarksPlaceMark<cr>| endif
-noremap <unique> <script> \sm m
-noremap <silent> m :exe 'norm \sm'.nr2char(getchar())<bar>call <sid>ShowMarks()<CR>
+if g:showmarks_enable && g:showmarks_add_maps
+	" Mappings (NOTE: Leave the '|'s immediately following the '<cr>' so the mapping does not contain any trailing spaces!)
+	if !hasmapto( '<Plug>ShowmarksShowMarksToggle' ) | map <silent> <unique> <leader>mt :ShowMarksToggle<cr>|    endif
+	if !hasmapto( '<Plug>ShowmarksShowMarksOn'     ) | map <silent> <unique> <leader>mo :ShowMarksOn<cr>|        endif
+	if !hasmapto( '<Plug>ShowmarksClearMark'       ) | map <silent> <unique> <leader>mh :ShowMarksClearMark<cr>| endif
+	if !hasmapto( '<Plug>ShowmarksClearAll'        ) | map <silent> <unique> <leader>ma :ShowMarksClearAll<cr>|  endif
+	if !hasmapto( '<Plug>ShowmarksPlaceMark'       ) | map <silent> <unique> <leader>mm :ShowMarksPlaceMark<cr>| endif
+	noremap <unique> <script> \sm m
+	noremap <silent> m :exe 'norm \sm'.nr2char(getchar())<bar>call <sid>ShowMarks()<CR>
+endif
 
 " AutoCommands: Only if ShowMarks is enabled
 if g:showmarks_enable == 1

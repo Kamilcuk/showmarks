@@ -168,6 +168,9 @@ The following mappings are setup by default:
 
 (see |mapleader| for how to setup the mapleader variable.)
 
+You may set `g:showmarks_add_maps` global variable to 0 to disable adding these
+mappings.
+
 ===============================================================================
 5. Commands                                                *showmarks-commands*
 
